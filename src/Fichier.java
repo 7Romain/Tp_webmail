@@ -1,9 +1,7 @@
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class Fichier {
@@ -15,7 +13,7 @@ public class Fichier {
 
     public void setContenu(String chaine) {
 
-        String fileTitle = this.nom + ".txt";
+        String fileTitle = "M" + this.nom + ".txt";
         try {
             FileWriter myWriter = new FileWriter(fileTitle);
             myWriter.write(chaine);
@@ -24,10 +22,11 @@ public class Fichier {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        System.out.println("message sauvegarder");
 
     }
 
-    public String getContenu(String fichierTxt) throws FileNotFoundException {
+    public String getContenu(String fichierTxt) throws IOException {
         LineNumberReader lineNumberReader = null;
 
         FileReader fileReader = new FileReader(fichierTxt);

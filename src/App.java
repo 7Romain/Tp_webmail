@@ -15,28 +15,35 @@ public class App extends Application {
 
     void exitApp(Stage stage) {
 
-        // if (!(textArea.getText().equals(""))) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Quitter ?");
-        alert.setHeaderText("Un message est en cours de rédaction !");
-        alert.setContentText(
-                "Êtes-vous sur de vouloir quitter l'application alors que le message en cours n'a pas été envoyé ?");
+        if (!(Laurent.isAreaTextFull())) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Quitter ?");
+            alert.setHeaderText("Un message est en cours de rédaction !");
+            alert.setContentText(
+                    "Êtes-vous sur de vouloir quitter l'application alors que le message en cours n'a pas été envoyé ?");
 
-        if (alert.showAndWait().get() == ButtonType.OK) {
+            if (alert.showAndWait().get() == ButtonType.OK) {
 
-            System.out.println("succes");
+                System.out.println("Quitter");
+                System.out.println(Laurent.isAreaTextFull());
+                stage.close();
+
+            }
+        } else {
+            System.out.println("Quitter");
+            System.out.println(Laurent.isAreaTextFull());
             stage.close();
         }
-        // }
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         Image premiereIcon = new Image("C:/Users/Oziri/Documents/CDA/Projets Java/Tp_fx_webmail/src/mail3.png");
         stage.getIcons().add(premiereIcon);
-
+        stage.setTitle("Web Mail Fx");
         stage.show();
         stage.setMinHeight(250);
         stage.setMinWidth(600);
@@ -44,6 +51,7 @@ public class App extends Application {
             event.consume();
             exitApp(stage);
         });
+        scene.getStylesheets().add(getClass().getResource("Style2.css").toExternalForm());
 
     }
 
