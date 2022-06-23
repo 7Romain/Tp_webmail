@@ -1,9 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Message {
     public Message(String to, String sujet, String contenu) {
         this.from = MailMgr.monEmail;
         this.to = to;
         this.sujet = sujet;
         this.contenu = contenu;
+        date = LocalDateTime.now();
 
     }
 
@@ -11,6 +15,14 @@ public class Message {
     private String to;
     private String sujet;
     private String contenu;
+    private LocalDateTime date;
+
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy à HH.mm.ss");
+
+        String formatedDateTime = date.format(formatter);
+        return formatedDateTime;
+    }
 
     public String getFrom() {
         return from;

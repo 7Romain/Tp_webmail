@@ -1,5 +1,7 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+        "src"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
@@ -10,6 +12,10 @@
         "c:\\javafx-sdk-18.0.1\\lib\\javafx.media.jar",
         "c:\\javafx-sdk-18.0.1\\lib\\javafx.swing.jar",
         "c:\\javafx-sdk-18.0.1\\lib\\javafx.web.jar",
-        "c:\\javafx-sdk-18.0.1\\lib\\javafx-swt.jar"
+        "c:\\javafx-sdk-18.0.1\\lib\\javafx-swt.jar",
+        "c:\\Java Jar\\activation-1.1.1.jar",
+        "c:\\Java Jar\\mail\\mailapi.jar",
+        "c:\\Java Jar\\mail\\smtp.jar",
+        "c:\\Java Jar\\mail\\javax.mail.jar"
     ]
 }

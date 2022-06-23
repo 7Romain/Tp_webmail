@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MailSender",
+            "request": "launch",
+            "mainClass": "MailSender",
+            "projectName": "Tp_fx_webmail_3616eeac"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

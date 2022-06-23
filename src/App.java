@@ -15,7 +15,7 @@ public class App extends Application {
 
     void exitApp(Stage stage) {
 
-        if (!(Laurent.isAreaTextFull())) {
+        if (Laurent.isAreaTextFull()) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Quitter ?");
             alert.setHeaderText("Un message est en cours de rédaction !");

@@ -37,14 +37,14 @@
 }
 
 #textArea{
-    -fx-background-color:  #AFF2FA;
+
     -fx-font-size: 20px;
     -fx-font-family: helvetica;
 
 }
 
 .text-area .content {
-    -fx-background-color: #cff8fc;
+    -fx-background-color: #9deef5;
  }
 
  .combo-box .text-field {

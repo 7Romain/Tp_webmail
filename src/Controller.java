@@ -61,12 +61,15 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void actionEnvoyer(ActionEvent event) {
+    void actionEnvoyer(ActionEvent event) throws Exception {
         String to1 = getEmail(cbMails.getValue());
         String sujet11 = fieldSujet.getText();
         String contenu1 = textArea.getText();
         Message message = new Message(to1, sujet11, contenu1);
         MailMgr mailMgr = new MailMgr();
+        MailSender mailSender = new MailSender(to1, sujet11, contenu1);
+
+        mailSender.goMail();
 
         mailMgr.envoyerMsg(message);
         sauvegarderMail(message);
@@ -240,13 +243,12 @@ public class Controller implements Initializable {
         }
 
         lineNumberReader = new LineNumberReader(fileReader);
-        // ArrayList<String> liste = new ArrayList<String>();
 
         String ligneLue = null;
         try {
             while ((ligneLue = lineNumberReader.readLine()) != null) {
                 String ligneLueNet = ligneLue.replaceAll(String.valueOf((char) 44), "  :  ");
-                // liste.add(ligneLueNet);
+
                 cbMails.getItems().add(ligneLueNet);
 
             }
@@ -254,7 +256,7 @@ public class Controller implements Initializable {
             lblErreur.setText("fichier introuvable");
             lblErreur.setVisible(true);
         }
-        // cbMails.getItems().addAll(liste);
+
         lblErreur.setVisible(false);
         btnEnvoyer.setDisable(true);
         menuEnvoyer.setDisable(true);
@@ -294,15 +296,17 @@ public class Controller implements Initializable {
         if (champsRemplis()) {
             btnEnvoyer.setDisable(false);
             menuEnvoyer.setDisable(false);
-            System.out.println("btn montré");
+            // System.out.println("btn montré");
         } else {
             btnEnvoyer.setDisable(true);
             menuEnvoyer.setDisable(true);
-            System.out.println("btn caché");
+            // System.out.println("btn caché");
         }
-        System.out.println("combo->" + Laurent.isComboBoxFull() + "; Area->" + Laurent.isAreaTextFull() + "; Field->"
-                + Laurent.isFieldTextFull() + "; comboText->" + Laurent.isComboBoxTextStatusFull());
-        System.out.println("champsRemplis ->" + champsRemplis());
+        // System.out.println("combo->" + Laurent.isComboBoxFull() + "; Area->" +
+        // Laurent.isAreaTextFull() + "; Field->"
+        // + Laurent.isFieldTextFull() + "; comboText->" +
+        // Laurent.isComboBoxTextStatusFull());
+        // System.out.println("champsRemplis ->" + champsRemplis());
     }
 
     public boolean champsRemplis() {
@@ -351,7 +355,7 @@ public class Controller implements Initializable {
     }
 
     public void sauvegarderMail(Message message) {
-        Fichier fichier = new Fichier(message.getTo());
+        Fichier fichier = new Fichier(message.getTo(), message.getSujet(), message.getDate());
         fichier.setContenu(message.getContenu());
 
     }

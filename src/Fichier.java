@@ -6,18 +6,24 @@ import java.util.Vector;
 
 public class Fichier {
     String nom;
+    String sujet;
+    String date;
 
-    public Fichier(String nom) {
+    public Fichier(String nom, String sujet, String date) {
         this.nom = nom;
+        this.sujet = sujet;
+        this.date = date;
+
     }
 
     public void setContenu(String chaine) {
 
-        String fileTitle = "M" + this.nom + ".txt";
+        String fileTitle = this.date + " à " + this.nom + ".txt";
         try {
             FileWriter myWriter = new FileWriter(fileTitle);
             myWriter.write(chaine);
             myWriter.close();
+            System.out.println("message écrit");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
