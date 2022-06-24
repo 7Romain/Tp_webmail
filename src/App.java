@@ -37,19 +37,19 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        Image premiereIcon = new Image("C:/Users/Oziri/Documents/CDA/Projets Java/Tp_fx_webmail/src/mail3.png");
-        stage.getIcons().add(premiereIcon);
-        stage.setTitle("Web Mail Fx");
-        stage.show();
-        stage.setMinHeight(250);
-        stage.setMinWidth(600);
-        stage.setOnCloseRequest(event -> {
+        primaryStage.setScene(scene);
+        Image premiereIcon = new Image("mail3.png");
+        primaryStage.getIcons().add(premiereIcon);
+        primaryStage.setTitle("Web Mail Fx");
+        primaryStage.show();
+        primaryStage.setMinHeight(250);
+        primaryStage.setMinWidth(600);
+        primaryStage.setOnCloseRequest(event -> {
             event.consume();
-            exitApp(stage);
+            exitApp(primaryStage);
         });
         scene.getStylesheets().add(getClass().getResource("Style2.css").toExternalForm());
 

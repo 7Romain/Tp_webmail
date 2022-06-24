@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Message {
     public Message(String to, String sujet, String contenu) {
-        this.from = MailMgr.monEmail;
+        this.from = "777.romain@gmail.com";
         this.to = to;
         this.sujet = sujet;
         this.contenu = contenu;

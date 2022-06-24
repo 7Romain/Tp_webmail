@@ -17,6 +17,11 @@ public class MailSender {
     // Replace sender@example.com with your "From" address.
     // This address must be verified.
     private String FROM = "777.romain@gmail.com";
+
+    public String getFROM() {
+        return FROM;
+    }
+
     private String FROMNAME = "7Romain";
 
     // Replace recipient@example.com with a "To" address. If your account
@@ -27,7 +32,7 @@ public class MailSender {
     private String SMTP_USERNAME = "777.romain@gmail.com";
 
     // Replace smtp_password with your Amazon SES SMTP password.
-    private String SMTP_PASSWORD = "--------------------";
+    private String SMTP_PASSWORD = "xajnehkqfvlaqdol";
 
     // The name of the Configuration Set to use for this message.
     // If you comment out or remove this variable, you will also need to

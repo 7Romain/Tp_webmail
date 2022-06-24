@@ -1,0 +1,46 @@
+
+
+.TextField{
+    -fx-control-inner-background: linear-gradient(to left,#D49CF7, #AFF2FA);
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 50px;
+} 
+
+#secondFrame{
+    -fx-background-color: linear-gradient(to left,#61D8DE, #E839F6);
+}
+
+
+
+
+
+#btnOk{
+    -fx-background-color: linear-gradient(to left,#D49CF7, #AFF2FA);
+}
+#btnAnnuler{
+    -fx-background-color: linear-gradient(to left,#D49CF7, #AFF2FA);
+}
+
+
+#fieldSujet{
+    -fx-background-color: linear-gradient(to left,#D49CF7, #AFF2FA);
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 50px;
+}
+
+
+.label {
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #9deef5;
+}
+
+#btnAnnuler {
+    -fx-font-weight: bold;
+}
+
+#btnOk{
+    -fx-font-weight: bold;
+}

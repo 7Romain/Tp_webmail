@@ -6,6 +6,8 @@ import java.io.LineNumberReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +16,9 @@ import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -28,11 +32,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
@@ -44,6 +51,31 @@ public class Controller implements Initializable {
     void infoBtnNouveau(MouseEvent event) {
         lblStatus.setText("Créer un nouveau message.");
 
+    }
+
+    @FXML
+    void entrerRepertoire(ActionEvent event) throws IOException {
+
+        newWindow();
+    }
+
+    private void newWindow() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("frame2.fxml"));
+
+            Scene scene2 = new Scene(fxmlLoader.load());
+            Stage stage2 = new Stage();
+            stage2.setTitle("Ajouter dans le répertoire");
+            stage2.setScene(scene2);
+            stage2.initModality(Modality.WINDOW_MODAL);
+            stage2.initOwner(stage);
+
+            stage2.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
     }
 
     @FXML
@@ -61,20 +93,21 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    private MenuItem menuAjoutContact;
+
+    @FXML
     void actionEnvoyer(ActionEvent event) throws Exception {
         String to1 = getEmail(cbMails.getValue());
         String sujet11 = fieldSujet.getText();
         String contenu1 = textArea.getText();
         Message message = new Message(to1, sujet11, contenu1);
-        MailMgr mailMgr = new MailMgr();
+
         MailSender mailSender = new MailSender(to1, sujet11, contenu1);
 
         mailSender.goMail();
 
-        mailMgr.envoyerMsg(message);
         sauvegarderMail(message);
-        lblStatus.setText("Message envoyé !");
-        lblStatus.setVisible(true);
+
         textArea.setText("");
         fieldSujet.setText("");
         cbMails.setValue("");
@@ -116,6 +149,12 @@ public class Controller implements Initializable {
     private MenuItem menuNouveau;
 
     @FXML
+    void actionMajList(MouseEvent event) {
+        actualisationCbMailsBox();
+
+    }
+
+    @FXML
     private MenuItem menuOuvrir;
 
     @FXML
@@ -132,6 +171,14 @@ public class Controller implements Initializable {
 
     @FXML
     private MenuBar menuBar;
+
+    @FXML
+    void actionToucheEnter(KeyEvent event) {
+        if ((event.getCode().equals(KeyCode.ENTER)) && (!(cbMails.getValue().isBlank()))) {
+            newWindow();
+        }
+
+    }
 
     @FXML
     private Font x3;
@@ -172,8 +219,9 @@ public class Controller implements Initializable {
     @FXML
     void actionOuvrir(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        File defaultDir = new File("C:/Users/Oziri/Documents/CDA/Projets Java/Tp_fx_webmail");
-        fileChooser.setInitialDirectory(defaultDir);
+        // File defaultDir = new File("C:/Users/Oziri/Documents/CDA/Projets
+        // Java/Tp_fx_webmail");
+        // fileChooser.setInitialDirectory(defaultDir);
         Stage direct = (Stage) mainFrame.getScene().getWindow();
         File file = fileChooser.showOpenDialog(direct);
         textArea.setText(lireFichier(file));
@@ -192,7 +240,8 @@ public class Controller implements Initializable {
     @FXML
     void ouvrirAbout(ActionEvent event) throws MalformedURLException {
 
-        String message1 = String.format("Envoi de mails à un destinataire   %n%n(c) 7Romain 2022  %n%nVersion 1.0",
+        String message1 = String.format(
+                "Envoi de mails à un destinataire   %n%n(c) 7Romain 2022  %n%nVersion 1.0 %n%nicons8.com",
                 null);
 
         ImageIcon icon = new ImageIcon(
@@ -232,6 +281,32 @@ public class Controller implements Initializable {
         btnEnvoyerI.setSmooth(true);
         btnEnvoyer.setGraphic(btnEnvoyerI);
 
+        actualisationCbMailsBox();
+
+        lblErreur.setVisible(false);
+        btnEnvoyer.setDisable(true);
+        menuEnvoyer.setDisable(true);
+        cbMails.setValue("");
+        textArea.setText("");
+        fieldSujet.setText("");
+
+        menuEnvoyer.setAccelerator(KeyCombination.keyCombination("F2"));
+        menuEnvoyer.setMnemonicParsing(true);
+        menuOuvrir.setMnemonicParsing(true);
+        btnQuitter.setMnemonicParsing(true);
+        menuNouveau.setMnemonicParsing(true);
+        menuParam.setMnemonicParsing(true);
+        btnAbout.setMnemonicParsing(true);
+        menuAjoutContact.setMnemonicParsing(true);
+
+        textArea.textProperty().addListener(e -> upDateTextStatus());
+        fieldSujet.textProperty().addListener(e -> upDateFieldStatus());
+        cbMails.valueProperty().addListener(e -> upDateComboBoxStatus());
+        cbMails.getEditor().textProperty().addListener(e -> upDateComboBoxTextStatus());
+
+    }
+
+    private void actualisationCbMailsBox() {
         FileReader fileReader;
         fileReader = null;
         try {
@@ -256,57 +331,19 @@ public class Controller implements Initializable {
             lblErreur.setText("fichier introuvable");
             lblErreur.setVisible(true);
         }
-
-        lblErreur.setVisible(false);
-        btnEnvoyer.setDisable(true);
-        menuEnvoyer.setDisable(true);
-        cbMails.setValue("");
-        textArea.setText("");
-        fieldSujet.setText("");
-
-        menuEnvoyer.setAccelerator(KeyCombination.keyCombination("F2"));
-        menuEnvoyer.setMnemonicParsing(true);
-        menuOuvrir.setMnemonicParsing(true);
-        btnQuitter.setMnemonicParsing(true);
-        menuNouveau.setMnemonicParsing(true);
-        menuParam.setMnemonicParsing(true);
-        btnAbout.setMnemonicParsing(true);
-
-        textArea.textProperty().addListener(e -> upDateTextStatus());
-        fieldSujet.textProperty().addListener(e -> upDateFieldStatus());
-        cbMails.valueProperty().addListener(e -> upDateComboBoxStatus());
-        cbMails.getEditor().textProperty().addListener(e -> upDateComboBoxTextStatus());
-        // cbMails.getEditor().textFormatterProperty().addListener(e ->
-        // upDateComboBoxTextStatus());
-        // cbMails.editorProperty().addListener(e -> upDateComboBoxTextStatus());
-
-        // textArea.textProperty().addListener(a -> montrerBtnEnvoyer());
-        // fieldSujet.textProperty().addListener(a -> montrerBtnEnvoyer());
-        // cbMails.valueProperty().addListener(a -> montrerBtnEnvoyer());
-        // cbMails.getEditor().textProperty().addListener(a -> montrerBtnEnvoyer());
-
-        // btnEnvoyer.addEventHandler(new EventType<>(e), arg1);
-
-        // textArea.getStylesheets().add("C:/Users/Oziri/Documents/CDA/Projets
-        // Java/Tp_fx_webmail/src/Style2.css");
-
     }
 
     public void montrerBtnEnvoyer() {
         if (champsRemplis()) {
             btnEnvoyer.setDisable(false);
             menuEnvoyer.setDisable(false);
-            // System.out.println("btn montré");
+
         } else {
             btnEnvoyer.setDisable(true);
             menuEnvoyer.setDisable(true);
-            // System.out.println("btn caché");
+
         }
-        // System.out.println("combo->" + Laurent.isComboBoxFull() + "; Area->" +
-        // Laurent.isAreaTextFull() + "; Field->"
-        // + Laurent.isFieldTextFull() + "; comboText->" +
-        // Laurent.isComboBoxTextStatusFull());
-        // System.out.println("champsRemplis ->" + champsRemplis());
+
     }
 
     public boolean champsRemplis() {
@@ -349,7 +386,7 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             lblErreur.setText("Adresse email invalide !");
             lblErreur.setVisible(true);
-            return MailMgr.monEmail;
+            return "Mail invalide : " + texte;
 
         }
     }
