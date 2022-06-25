@@ -245,7 +245,7 @@ public class Controller implements Initializable {
                 null);
 
         ImageIcon icon = new ImageIcon(
-                "C:/Users/Oziri/Documents/CDA/Projets Java/Tp_fx_webmail/src/mail3.png");
+                "/src/mail3.png");
 
         JOptionPane.showMessageDialog(null, message1, "À propos de Web Mail", JOptionPane.INFORMATION_MESSAGE, icon);
     }
@@ -311,7 +311,7 @@ public class Controller implements Initializable {
         fileReader = null;
         try {
             fileReader = new FileReader(
-                    "C:/Users/Oziri/Documents/CDA/Projets Java/Tp_fx_webmail/src/adressesMails.csv");
+                    "src\\adressesMails.csv");
         } catch (FileNotFoundException e) {
             lblErreur.setText("fichier introuvable");
             lblErreur.setVisible(true);

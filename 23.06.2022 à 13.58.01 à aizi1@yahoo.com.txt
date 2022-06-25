@@ -1,3 +1,0 @@
-Ma première appli JavaFx.
-
-Enjoy
