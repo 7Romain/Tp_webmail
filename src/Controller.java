@@ -60,6 +60,7 @@ public class Controller implements Initializable {
     }
 
     private void newWindow() {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("frame2.fxml"));
@@ -72,6 +73,7 @@ public class Controller implements Initializable {
             stage2.initOwner(stage);
 
             stage2.show();
+
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
@@ -150,7 +152,7 @@ public class Controller implements Initializable {
 
     @FXML
     void actionMajList(MouseEvent event) {
-        actualisationCbMailsBox();
+        // actualisationCbMailsBox();
 
     }
 
@@ -219,9 +221,8 @@ public class Controller implements Initializable {
     @FXML
     void actionOuvrir(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        // File defaultDir = new File("C:/Users/Oziri/Documents/CDA/Projets
-        // Java/Tp_fx_webmail");
-        // fileChooser.setInitialDirectory(defaultDir);
+        File defaultDir = new File("C:/Users/Oziri/Documents/CDA/ProjetsJava/Tp_fx_webmail");
+        fileChooser.setInitialDirectory(defaultDir);
         Stage direct = (Stage) mainFrame.getScene().getWindow();
         File file = fileChooser.showOpenDialog(direct);
         textArea.setText(lireFichier(file));
@@ -311,7 +312,7 @@ public class Controller implements Initializable {
         fileReader = null;
         try {
             fileReader = new FileReader(
-                    "src\\adressesMails.csv");
+                    "src/adressesMails.csv");
         } catch (FileNotFoundException e) {
             lblErreur.setText("fichier introuvable");
             lblErreur.setVisible(true);
@@ -320,6 +321,7 @@ public class Controller implements Initializable {
         lineNumberReader = new LineNumberReader(fileReader);
 
         String ligneLue = null;
+        cbMails.getItems().clear();
         try {
             while ((ligneLue = lineNumberReader.readLine()) != null) {
                 String ligneLueNet = ligneLue.replaceAll(String.valueOf((char) 44), "  :  ");
@@ -352,9 +354,18 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    void actionSaveMail(KeyEvent event) {
+        Laurent.setTaxi(cbMails.getValue());
+
+    }
+
     public void upDateComboBoxTextStatus() {
+
+        // actualisationCbMailsBox();
         Laurent.setComboBoxTextStatusFull(!(cbMails.getEditor().getText().isBlank()));
         montrerBtnEnvoyer();
+
     }
 
     public void upDateFieldStatus() {
@@ -363,7 +374,9 @@ public class Controller implements Initializable {
     }
 
     public void upDateComboBoxStatus() {
+
         Laurent.setComboBoxFull(!(cbMails.getValue().isBlank()));
+        // actualisationCbMailsBox();
         montrerBtnEnvoyer();
     }
 
@@ -408,7 +421,7 @@ public class Controller implements Initializable {
         }
 
         lineNumberReader = new LineNumberReader(fileReader);
-        // ArrayList<String> liste = new ArrayList<String>();
+
         String totale = "";
         String ligneLue = null;
         try {

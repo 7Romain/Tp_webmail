@@ -4,6 +4,15 @@ public class Laurent {
     public static boolean isFieldTextFull = false;
     public static boolean isComboBoxFull = false;
     public static boolean isComboBoxTextStatusFull = false;
+    public static String taxi = "";
+
+    public static String getTaxi() {
+        return taxi;
+    }
+
+    public static void setTaxi(String taxi) {
+        Laurent.taxi = taxi;
+    }
 
     public static boolean isComboBoxTextStatusFull() {
         return isComboBoxTextStatusFull;

@@ -2,17 +2,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class secondFrameController {
+public class secondFrameController implements Initializable {
 
     @FXML
     private Button btnAnnuler;
@@ -47,6 +51,7 @@ public class secondFrameController {
         if (isEmail(mail)) {
             ajoutCsv(prenom, nom, mail);
             Stage secondStage = (Stage) secondFrame.getScene().getWindow();
+
             secondStage.close();
         }
 
@@ -92,6 +97,16 @@ public class secondFrameController {
 
         }
         return false;
+
+    }
+
+    public void displayMail(String mail) {
+        fieldMail.setText(mail);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        displayMail(Laurent.getTaxi());
 
     }
 }
