@@ -152,7 +152,7 @@ public class Controller implements Initializable {
 
     @FXML
     void actionMajList(MouseEvent event) {
-        // actualisationCbMailsBox();
+        actualisationCbMailsBox();
 
     }
 
@@ -176,9 +176,16 @@ public class Controller implements Initializable {
 
     @FXML
     void actionToucheEnter(KeyEvent event) {
-        if ((event.getCode().equals(KeyCode.ENTER)) && (!(cbMails.getValue().isBlank()))) {
-            newWindow();
+
+        switch (event.getCode()) {
+            case ENTER:
+                newWindow();
+
         }
+        // if ((event.getCode().equals(KeyCode.ENTER)) &&
+        // (!(cbMails.getValue().isBlank()))) {
+        // newWindow();
+        // }
 
     }
 
@@ -304,6 +311,7 @@ public class Controller implements Initializable {
         fieldSujet.textProperty().addListener(e -> upDateFieldStatus());
         cbMails.valueProperty().addListener(e -> upDateComboBoxStatus());
         cbMails.getEditor().textProperty().addListener(e -> upDateComboBoxTextStatus());
+        // cbMails.onShowingProperty().addListener(e -> actualisationCbMailsBox());
 
     }
 
@@ -327,6 +335,7 @@ public class Controller implements Initializable {
                 String ligneLueNet = ligneLue.replaceAll(String.valueOf((char) 44), "  :  ");
 
                 cbMails.getItems().add(ligneLueNet);
+                System.out.println("actualiser");
 
             }
         } catch (IOException e) {
