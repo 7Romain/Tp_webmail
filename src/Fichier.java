@@ -58,11 +58,4 @@ public class Fichier {
         return ligneTotal;
     }
 
-    public Vector getlignes() {
-        Vector<String> vecFichier = new Vector<String>();
-
-        return vecFichier;
-
-    }
-
 }
