@@ -8,11 +8,24 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * @author 7Romain
+ * @version 0.9
+ */
+
 public class App extends Application {
+
+    /**
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         launch(args);
     }
 
+    /**
+     * @param stage
+     */
     void exitApp(Stage stage) {
 
         if (Laurent.isAreaTextFull()) {
@@ -36,6 +49,10 @@ public class App extends Application {
         }
     }
 
+    /**
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));

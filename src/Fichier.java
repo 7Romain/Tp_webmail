@@ -2,7 +2,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.Vector;
 
 public class Fichier {
     String nom;
@@ -16,6 +15,9 @@ public class Fichier {
 
     }
 
+    /**
+     * @param chaine
+     */
     public void setContenu(String chaine) {
 
         String fileTitle = this.date + " à " + this.nom + ".txt";
@@ -32,6 +34,11 @@ public class Fichier {
 
     }
 
+    /**
+     * @param fichierTxt
+     * @return String
+     * @throws IOException
+     */
     public String getContenu(String fichierTxt) throws IOException {
         LineNumberReader lineNumberReader = null;
 
