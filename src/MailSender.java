@@ -8,10 +8,10 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 
-    public MailSender(String tO, String subject, String body) {
-        this.TO = tO;
-        this.SUBJECT = subject;
-        this.BODY = body;
+    public MailSender(MessageApp message) {
+        this.TO = message.getTo();
+        this.SUBJECT = message.getSujet();
+        this.BODY = message.getContenu();
     }
 
     // Replace sender@example.com with your "From" address.

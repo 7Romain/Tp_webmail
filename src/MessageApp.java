@@ -1,8 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Message {
-    public Message(String to, String sujet, String contenu) {
+public class MessageApp {
+    public MessageApp(String to, String sujet, String contenu) {
         this.from = "777.romain@gmail.com";
         this.to = to;
         this.sujet = sujet;

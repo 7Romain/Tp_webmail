@@ -118,9 +118,9 @@ public class Controller implements Initializable {
         String to1 = getEmail(cbMails.getValue());
         String sujet11 = fieldSujet.getText();
         String contenu1 = textArea.getText();
-        Message message = new Message(to1, sujet11, contenu1);
+        MessageApp message = new MessageApp(to1, sujet11, contenu1);
 
-        MailSender mailSender = new MailSender(to1, sujet11, contenu1);
+        MailSender mailSender = new MailSender(message);
 
         mailSender.goMail();
 
@@ -468,7 +468,7 @@ public class Controller implements Initializable {
      * @param message
      *                garde une copie du mail
      */
-    public void sauvegarderMail(Message message) {
+    public void sauvegarderMail(MessageApp message) {
         Fichier fichier = new Fichier(message.getTo(), message.getSujet(), message.getDate());
         fichier.setContenu(message.getContenu());
 
