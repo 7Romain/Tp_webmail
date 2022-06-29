@@ -32,7 +32,7 @@ public class MailSender {
     private String SMTP_USERNAME = "777.romain@gmail.com";
 
     // Replace smtp_password with your Amazon SES SMTP password.
-    private String SMTP_PASSWORD = "xajnehkqfvlaqdol";
+    private String SMTP_PASSWORD = "----------------";
 
     // The name of the Configuration Set to use for this message.
     // If you comment out or remove this variable, you will also need to
