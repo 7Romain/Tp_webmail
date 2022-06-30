@@ -18,10 +18,14 @@ public class MailSender {
     // This address must be verified.
     private String FROM = "777.romain@gmail.com";
 
+    /**
+     * @return String
+     */
     public String getFROM() {
         return FROM;
     }
 
+    /** mettre ici son nom */
     private String FROMNAME = "7Romain";
 
     // Replace recipient@example.com with a "To" address. If your account
@@ -29,9 +33,11 @@ public class MailSender {
     private String TO;
 
     // Replace smtp_username with your Amazon SES SMTP user name.
+    /** mettre ici son adresse mail */
     private String SMTP_USERNAME = "777.romain@gmail.com";
 
     // Replace smtp_password with your Amazon SES SMTP password.
+    /** mettre ici son mot de passe d'application mail */
     private String SMTP_PASSWORD = "-----------";
 
     // The name of the Configuration Set to use for this message.
@@ -52,6 +58,10 @@ public class MailSender {
 
     private String BODY;
 
+    /**
+     * @throws Exception
+     *                   Methode qui envoie le mail.
+     */
     public void goMail() throws Exception {
 
         // Create a Properties object to contain connection configuration information.
