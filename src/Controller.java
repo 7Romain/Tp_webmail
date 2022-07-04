@@ -65,7 +65,11 @@ public class Controller implements Initializable {
         newWindow();
     }
 
-    private void newWindow() { /* Fenêtre d'ajout de contact' */
+    /**
+     * Fenêtre d'ajout de contact
+     * 
+     */
+    private void newWindow() {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -112,6 +116,7 @@ public class Controller implements Initializable {
     /**
      * @param event
      * @throws Exception
+     *                   Envoie l'email et le sauvegarde
      */
     @FXML
     void actionEnvoyer(ActionEvent event) throws Exception {
@@ -146,9 +151,10 @@ public class Controller implements Initializable {
 
     /**
      * @param event
+     *              Efface les zones de textes
      */
     @FXML
-    void actionNouveau(ActionEvent event) { /* Efface les zones de textes */
+    void actionNouveau(ActionEvent event) {
         if (!(textArea.getText().equals(""))) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Recommencer ?");
@@ -171,6 +177,7 @@ public class Controller implements Initializable {
 
     /**
      * @param event
+     *              actualise la list de la choiceBox
      */
     @FXML
     void actionMajList(MouseEvent event) {
@@ -225,9 +232,10 @@ public class Controller implements Initializable {
 
     /**
      * @param event
+     *              Quitter appli via menu
      */
     @FXML
-    public void exitApp(ActionEvent event) { /* Quitter appli via menu */
+    public void exitApp(ActionEvent event) {
         if (!(textArea.getText().equals(""))) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Quitter ?");
@@ -254,9 +262,10 @@ public class Controller implements Initializable {
 
     /**
      * @param event
+     *              Ouvrir un email déja envoyé
      */
     @FXML
-    void actionOuvrir(ActionEvent event) { /* Ouvrir un email déja envoyé */
+    void actionOuvrir(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         File defaultDir = new File("C:/Users/Oziri/Documents/CDA/ProjetsJava/Tp_fx_webmail");
         fileChooser.setInitialDirectory(defaultDir);
@@ -278,9 +287,10 @@ public class Controller implements Initializable {
     /**
      * @param event
      * @throws MalformedURLException
+     *                               Boite de dialogue "à propos"
      */
     @FXML
-    void ouvrirAbout(ActionEvent event) throws MalformedURLException { /* Boite à propos */
+    void ouvrirAbout(ActionEvent event) throws MalformedURLException {
 
         String message1 = String.format(
                 "Envoi de mails à un destinataire   %n%n(c) 7Romain 2022  %n%nVersion 1.0 %n%nicons8.com",
@@ -355,7 +365,8 @@ public class Controller implements Initializable {
 
     }
 
-    private void actualisationCbMailsBox() { /* actualiser liste de la combo box */
+    /** actualiser la liste de la combo box */
+    private void actualisationCbMailsBox() {
         FileReader fileReader;
         fileReader = null;
         try {
@@ -384,6 +395,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * @param (champsRemplis()
+     */
     public void montrerBtnEnvoyer() { /* active le bouton si les champs sont remplis */
         if (champsRemplis()) {
             btnEnvoyer.setDisable(false);
@@ -399,8 +413,9 @@ public class Controller implements Initializable {
 
     /**
      * @return boolean
+     *         Test si les champs sont vides
      */
-    public boolean champsRemplis() { /* Test si les champs sont vides ou pas */
+    public boolean champsRemplis() {
         return (Laurent.isAreaTextFull() && Laurent.isFieldTextFull()
                 && Laurent.isComboBoxTextStatusFull());
 
@@ -408,33 +423,38 @@ public class Controller implements Initializable {
 
     /**
      * @param event
+     *              sauvegarde l'email en cours de frappe
      */
     @FXML
-    void actionSaveMail(KeyEvent event) { /* sauvegarde l'email en cours de frappe */
+    void actionSaveMail(KeyEvent event) {
         Laurent.setTaxi(cbMails.getValue());
 
     }
 
-    public void upDateComboBoxTextStatus() { /* test si le champ de texte de la combo box contient quelque chose */
+    /** test si le champ de texte de la combo box contient quelque chose */
+    public void upDateComboBoxTextStatus() {
 
         Laurent.setComboBoxTextStatusFull(!(cbMails.getEditor().getText().isBlank()));
         montrerBtnEnvoyer();
 
     }
 
-    public void upDateFieldStatus() { /* test si le champ de texte contient quelque chose */
+    /** test si le champ de texte contient quelque chose */
+    public void upDateFieldStatus() {
         Laurent.setFieldTextFull(!(fieldSujet.getText().isBlank()));
         montrerBtnEnvoyer();
     }
 
-    public void upDateComboBoxStatus() {/* test si on a selectionné un item de la combobox */
+    /** test si on a selectionné un item de la combobox */
+    public void upDateComboBoxStatus() {
 
         Laurent.setComboBoxFull(!(cbMails.getValue().isBlank()));
-        // actualisationCbMailsBox();
+
         montrerBtnEnvoyer();
     }
 
-    public void upDateTextStatus() {/* test si la zone de texte contient quelque chose */
+    /** test si la zone de texte contient quelque chose */
+    public void upDateTextStatus() {
 
         Laurent.setAreaTextFull(!(textArea.getText().isBlank()));
         montrerBtnEnvoyer();
@@ -444,10 +464,10 @@ public class Controller implements Initializable {
     /**
      * @param texte
      * @return String
+     *         trouve l'email parmis le nom, le prénom, le mail dans la liste de
+     *         contact
      */
-    public String getEmail(String texte) { /*
-                                            * trouve l'email parmis le nom, le prénom, le mail dans la liste de contact
-                                            */
+    public String getEmail(String texte) {
 
         try {
             Matcher m = Pattern.compile(("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+")).matcher(texte);

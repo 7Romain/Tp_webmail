@@ -17,6 +17,9 @@ public class MessageApp {
     private String contenu;
     private LocalDateTime date;
 
+    /**
+     * @return String
+     */
     public String getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy à HH.mm.ss");
 
@@ -24,22 +27,37 @@ public class MessageApp {
         return formatedDateTime;
     }
 
+    /**
+     * @return String
+     */
     public String getFrom() {
         return from;
     }
 
+    /**
+     * @return String
+     */
     public String getTo() {
         return to;
     }
 
+    /**
+     * @return String
+     */
     public String getSujet() {
         return sujet;
     }
 
+    /**
+     * @return String
+     */
     public String getContenu() {
         return contenu;
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "L'email envoyé par " + from + " à " + to + " à pour objet : « " + sujet

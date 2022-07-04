@@ -36,6 +36,9 @@ public class secondFrameController implements Initializable {
     @FXML
     private VBox secondFrame;
 
+    /**
+     * @param event
+     */
     @FXML
     void actionBtnAnnuler(ActionEvent event) {
         Stage secondStage = (Stage) secondFrame.getScene().getWindow();
@@ -43,6 +46,9 @@ public class secondFrameController implements Initializable {
 
     }
 
+    /**
+     * @param event
+     */
     @FXML
     void actionbtnOk(ActionEvent event) {
         String prenom = fieldPrenom.getText();
@@ -57,6 +63,11 @@ public class secondFrameController implements Initializable {
 
     }
 
+    /**
+     * @param prenom
+     * @param nom
+     * @param mail
+     */
     public void ajoutCsv(String prenom, String nom, String mail) {
         try {
 
@@ -83,6 +94,10 @@ public class secondFrameController implements Initializable {
 
     }
 
+    /**
+     * @param texte
+     * @return boolean
+     */
     public boolean isEmail(String texte) {
 
         try {
@@ -100,10 +115,17 @@ public class secondFrameController implements Initializable {
 
     }
 
+    /**
+     * @param mail
+     */
     public void displayMail(String mail) {
         fieldMail.setText(mail);
     }
 
+    /**
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayMail(Laurent.getTaxi());
