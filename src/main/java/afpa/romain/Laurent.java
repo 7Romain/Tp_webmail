@@ -1,3 +1,5 @@
+package afpa.romain;
+
 public class Laurent {
 
     public static boolean isAreaTextFull = false;

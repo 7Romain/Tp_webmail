@@ -1,7 +1,15 @@
+package afpa.romain;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MessageApp {
+    private String from;
+    private String to;
+    private String sujet;
+    private String contenu;
+    private LocalDateTime date;
+
     public MessageApp(String to, String sujet, String contenu) {
         this.from = "777.romain@gmail.com";
         this.to = to;
@@ -10,12 +18,6 @@ public class MessageApp {
         date = LocalDateTime.now();
 
     }
-
-    private String from;
-    private String to;
-    private String sujet;
-    private String contenu;
-    private LocalDateTime date;
 
     /**
      * @return String

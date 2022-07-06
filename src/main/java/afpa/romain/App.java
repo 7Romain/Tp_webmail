@@ -1,3 +1,5 @@
+package afpa.romain;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +57,8 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        System.out.println(App.class.getResource("/mainWindow.fxml"));
+        Parent root = FXMLLoader.load(App.class.getResource("/mainWindow.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         Image premiereIcon = new Image("mail3.png");
@@ -68,7 +71,7 @@ public class App extends Application {
             event.consume();
             exitApp(primaryStage);
         });
-        scene.getStylesheets().add(getClass().getResource("Style2.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/Style2.css").toExternalForm());
 
     }
 
