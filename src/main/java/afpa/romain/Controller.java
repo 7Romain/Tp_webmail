@@ -1,35 +1,12 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+package afpa.romain;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
@@ -41,10 +18,58 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Controller implements Initializable {
 
+    LineNumberReader lineNumberReader = null;
+    Stage stage;
     @FXML
     private Button btnEnvoyer;
+    @FXML
+    private VBox mainFrame;
+    @FXML
+    private MenuItem menuAjoutContact;
+    @FXML
+    private Label lblStatus;
+    @FXML
+    private Button btnNouveau;
+    @FXML
+    private Label lblErreur;
+    @FXML
+    private Button btnOuvrir;
+    @FXML
+    private MenuItem menuNouveau;
+    @FXML
+    private MenuItem menuOuvrir;
+    @FXML
+    private TextArea textArea;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private Font x3;
+    @FXML
+    private MenuItem btnQuitter;
+    @FXML
+    private ComboBox<String> cbMails;
+    @FXML
+    private MenuItem btnAbout;
+    @FXML
+    private MenuItem menuEnvoyer;
+    @FXML
+    private MenuItem menuParam;
+    @FXML
+    private TextField fieldSujet;
 
     /**
      * @param event
@@ -67,7 +92,6 @@ public class Controller implements Initializable {
 
     /**
      * Fenêtre d'ajout de contact
-     * 
      */
     private void newWindow() {
 
@@ -90,9 +114,6 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    private VBox mainFrame;
-
     /**
      * @param event
      */
@@ -110,13 +131,9 @@ public class Controller implements Initializable {
         lblStatus.setText("Envoyer l'email.");
     }
 
-    @FXML
-    private MenuItem menuAjoutContact;
-
     /**
      * @param event
-     * @throws Exception
-     *                   Envoie l'email et le sauvegarde
+     * @throws Exception Envoie l'email et le sauvegarde
      */
     @FXML
     void actionEnvoyer(ActionEvent event) throws Exception {
@@ -137,21 +154,8 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML
-    private Label lblStatus;
-
-    @FXML
-    private Button btnNouveau;
-
-    @FXML
-    private Label lblErreur;
-
-    @FXML
-    private Button btnOuvrir;
-
     /**
-     * @param event
-     *              Efface les zones de textes
+     * @param event Efface les zones de textes
      */
     @FXML
     void actionNouveau(ActionEvent event) {
@@ -172,21 +176,14 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML
-    private MenuItem menuNouveau;
-
     /**
-     * @param event
-     *              actualise la list de la choiceBox
+     * @param event actualise la list de la choiceBox
      */
     @FXML
     void actionMajList(MouseEvent event) {
         actualisationCbMailsBox();
 
     }
-
-    @FXML
-    private MenuItem menuOuvrir;
 
     /**
      * @param event
@@ -196,15 +193,6 @@ public class Controller implements Initializable {
 
         lblStatus.setText("");
     }
-
-    @FXML
-    private TextArea textArea;
-
-    @FXML
-    private ScrollPane scrollPane;
-
-    @FXML
-    private MenuBar menuBar;
 
     /**
      * @param event
@@ -220,19 +208,8 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML
-    private Font x3;
-
-    @FXML
-    private MenuItem btnQuitter;
-
-    @FXML
-    private ComboBox<String> cbMails;
-    LineNumberReader lineNumberReader = null;
-
     /**
-     * @param event
-     *              Quitter appli via menu
+     * @param event Quitter appli via menu
      */
     @FXML
     public void exitApp(ActionEvent event) {
@@ -257,12 +234,8 @@ public class Controller implements Initializable {
         }
     }
 
-    @FXML
-    private MenuItem btnAbout;
-
     /**
-     * @param event
-     *              Ouvrir un email déja envoyé
+     * @param event Ouvrir un email déja envoyé
      */
     @FXML
     void actionOuvrir(ActionEvent event) {
@@ -275,19 +248,9 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML
-    private MenuItem menuEnvoyer;
-
-    @FXML
-    private MenuItem menuParam;
-
-    @FXML
-    private TextField fieldSujet;
-
     /**
      * @param event
-     * @throws MalformedURLException
-     *                               Boite de dialogue "à propos"
+     * @throws MalformedURLException Boite de dialogue "à propos"
      */
     @FXML
     void ouvrirAbout(ActionEvent event) throws MalformedURLException {
@@ -301,8 +264,6 @@ public class Controller implements Initializable {
 
         JOptionPane.showMessageDialog(null, message1, "À propos de Web Mail", JOptionPane.INFORMATION_MESSAGE, icon);
     }
-
-    Stage stage;
 
     /**
      * @param event
@@ -365,15 +326,19 @@ public class Controller implements Initializable {
 
     }
 
-    /** actualiser la liste de la combo box */
+    /**
+     * actualiser la liste de la combo box
+     */
     private void actualisationCbMailsBox() {
         FileReader fileReader;
         fileReader = null;
         try {
             fileReader = new FileReader(
-                    "src/adressesMails.csv");
+                    getClass().getResource("/adressesMails.csv").getPath());
         } catch (FileNotFoundException e) {
             lblErreur.setText("fichier introuvable");
+
+            ;
             lblErreur.setVisible(true);
         }
 
@@ -396,7 +361,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param (champsRemplis()
+     *
      */
     public void montrerBtnEnvoyer() { /* active le bouton si les champs sont remplis */
         if (champsRemplis()) {
@@ -413,7 +378,7 @@ public class Controller implements Initializable {
 
     /**
      * @return boolean
-     *         Test si les champs sont vides
+     * Test si les champs sont vides
      */
     public boolean champsRemplis() {
         return (Laurent.isAreaTextFull() && Laurent.isFieldTextFull()
@@ -422,8 +387,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param event
-     *              sauvegarde l'email en cours de frappe
+     * @param event sauvegarde l'email en cours de frappe
      */
     @FXML
     void actionSaveMail(KeyEvent event) {
@@ -431,7 +395,9 @@ public class Controller implements Initializable {
 
     }
 
-    /** test si le champ de texte de la combo box contient quelque chose */
+    /**
+     * test si le champ de texte de la combo box contient quelque chose
+     */
     public void upDateComboBoxTextStatus() {
 
         Laurent.setComboBoxTextStatusFull(!(cbMails.getEditor().getText().isBlank()));
@@ -439,13 +405,17 @@ public class Controller implements Initializable {
 
     }
 
-    /** test si le champ de texte contient quelque chose */
+    /**
+     * test si le champ de texte contient quelque chose
+     */
     public void upDateFieldStatus() {
         Laurent.setFieldTextFull(!(fieldSujet.getText().isBlank()));
         montrerBtnEnvoyer();
     }
 
-    /** test si on a selectionné un item de la combobox */
+    /**
+     * test si on a selectionné un item de la combobox
+     */
     public void upDateComboBoxStatus() {
 
         Laurent.setComboBoxFull(!(cbMails.getValue().isBlank()));
@@ -453,7 +423,9 @@ public class Controller implements Initializable {
         montrerBtnEnvoyer();
     }
 
-    /** test si la zone de texte contient quelque chose */
+    /**
+     * test si la zone de texte contient quelque chose
+     */
     public void upDateTextStatus() {
 
         Laurent.setAreaTextFull(!(textArea.getText().isBlank()));
@@ -464,8 +436,8 @@ public class Controller implements Initializable {
     /**
      * @param texte
      * @return String
-     *         trouve l'email parmis le nom, le prénom, le mail dans la liste de
-     *         contact
+     * trouve l'email parmis le nom, le prénom, le mail dans la liste de
+     * contact
      */
     public String getEmail(String texte) {
 
@@ -485,8 +457,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param message
-     *                garde une copie du mail
+     * @param message garde une copie du mail
      */
     public void sauvegarderMail(MessageApp message) {
         Fichier fichier = new Fichier(message.getTo(), message.getSujet(), message.getDate());
@@ -497,7 +468,7 @@ public class Controller implements Initializable {
     /**
      * @param file
      * @return String
-     *         affiche le mail déja sauvegardé dans la zone de texte
+     * affiche le mail déja sauvegardé dans la zone de texte
      */
     public String lireFichier(File file) {
         FileReader fileReader;

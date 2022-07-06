@@ -1,22 +1,55 @@
-import java.util.Properties;
+package afpa.romain;
 
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class MailSender {
+
+    // Replace sender@example.com with your "From" address.
+    // This address must be verified.
+    private String FROM = "777.romain@gmail.com";
+    /**
+     * mettre ici son nom
+     */
+    private String FROMNAME = "7Romain";
+    // Replace recipient@example.com with a "To" address. If your account
+    // is still in the sandbox, this address must be verified.
+    private String TO;
+    /**
+     * mettre ici son adresse mail
+     */
+    private String SMTP_USERNAME = "777.romain@gmail.com";
+    /**
+     * mettre ici son mot de passe d'application mail
+     */
+    private String SMTP_PASSWORD = "-----------";
+
+    // Replace smtp_username with your Amazon SES SMTP user name.
+    // The name of the Configuration Set to use for this message.
+    // If you comment out or remove this variable, you will also need to
+    // comment out or remove the header below.
+    private String CONFIGSET = "ConfigSet";
+
+    // Replace smtp_password with your Amazon SES SMTP password.
+    // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
+    // See
+    // https://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html#region-endpoints
+    // for more information.
+    private String HOST = "smtp.gmail.com";
+    // The port you will connect to on the Amazon SES SMTP endpoint.
+    private int PORT = 587;
+    private String SUBJECT;
+    private String BODY;
 
     public MailSender(MessageApp message) {
         this.TO = message.getTo();
         this.SUBJECT = message.getSujet();
         this.BODY = message.getContenu();
     }
-
-    // Replace sender@example.com with your "From" address.
-    // This address must be verified.
-    private String FROM = "777.romain@gmail.com";
 
     /**
      * @return String
@@ -25,42 +58,8 @@ public class MailSender {
         return FROM;
     }
 
-    /** mettre ici son nom */
-    private String FROMNAME = "7Romain";
-
-    // Replace recipient@example.com with a "To" address. If your account
-    // is still in the sandbox, this address must be verified.
-    private String TO;
-
-    // Replace smtp_username with your Amazon SES SMTP user name.
-    /** mettre ici son adresse mail */
-    private String SMTP_USERNAME = "777.romain@gmail.com";
-
-    // Replace smtp_password with your Amazon SES SMTP password.
-    /** mettre ici son mot de passe d'application mail */
-    private String SMTP_PASSWORD = "-----------";
-
-    // The name of the Configuration Set to use for this message.
-    // If you comment out or remove this variable, you will also need to
-    // comment out or remove the header below.
-    private String CONFIGSET = "ConfigSet";
-
-    // Amazon SES SMTP host name. This example uses the US West (Oregon) region.
-    // See
-    // https://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html#region-endpoints
-    // for more information.
-    private String HOST = "smtp.gmail.com";
-
-    // The port you will connect to on the Amazon SES SMTP endpoint.
-    private int PORT = 587;
-
-    private String SUBJECT;
-
-    private String BODY;
-
     /**
-     * @throws Exception
-     *                   Methode qui envoie le mail.
+     * @throws Exception Methode qui envoie le mail.
      */
     public void goMail() throws Exception {
 
