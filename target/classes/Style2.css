@@ -1,0 +1,55 @@
+#cbMails-base {
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-control-inner-background: linear-gradient(to left, #D49CF7, #AFF2FA);
+
+}
+
+#cbMails {
+    -fx-control-inner-background: linear-gradient(to left, #D49CF7, #AFF2FA);
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 50px;
+}
+
+#mainFrame {
+    -fx-background-color: linear-gradient(to left, #61D8DE, #E839F6);
+}
+
+#menuBar {
+    -fx-background-color: linear-gradient(to left, #61D8DE, #E839F6);
+}
+
+
+
+#btnEnvoyer {
+    -fx-background-color: linear-gradient(to left, #D49CF7, #AFF2FA);
+}
+
+#btnOuvrir {
+    -fx-background-color: linear-gradient(to left, #D49CF7, #AFF2FA);
+}
+
+#btnNouveau {
+    -fx-background-color: linear-gradient(to left, #D49CF7, #AFF2FA);
+}
+
+#fieldSujet {
+    -fx-background-color: linear-gradient(to left, #D49CF7, #AFF2FA);
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 50px;
+}
+
+#textArea {
+
+    -fx-font-size: 20px;
+    -fx-font-family: helvetica;
+
+}
+
+.text-area .content {
+    -fx-background-color: #9deef5;
+}
+
+.combo-box .text-field {
+    -fx-background-color: linear-gradient(to left, #D49CF7, #AFF2FA);
+
+}
